@@ -39,6 +39,7 @@
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
+    "@types/async-retry": "^1.4.8",
     "@types/cheerio": "^0.22.31",
     "@types/node": "^18.15.11",
     "typescript": "^5.0.3"

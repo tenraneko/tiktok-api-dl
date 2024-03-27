@@ -20,14 +20,17 @@ export const TiktokAPI = (url: string) =>
 
         let data2 = await fetchTiktokData(ID)
 
-        if (!data2.content) {
+        if (!data2?.content) {
           return resolve({
             status: "error",
             message: "Failed to fetch tiktok data. Make sure your tiktok url is correct!"
           })
         }
 
-        const { content, author, statistics, music } = data2
+        const author = data2!.author!
+        const content: any = data2!.content!
+        const music = data2!.music!
+        const statistics = data2!.statistics!
 
         // Download Result
         if (content.image_post_info) {
@@ -39,10 +42,10 @@ export const TiktokAPI = (url: string) =>
               id: content.aweme_id,
               createTime: content.create_time,
               description: content.desc,
-              hashtag: content.text_extra.filter((x) => x.hashtag_name !== undefined).map((v) => v.hashtag_name),
+              hashtag: content.text_extra.filter((x: any) => x.hashtag_name !== undefined).map((v: any) => v.hashtag_name),
               author,
               statistics,
-              images: content.image_post_info.images.map((v) => v.display_image.url_list[0]),
+              images: content.image_post_info.images.map((v: any) => v.display_image.url_list[0]),
               music
             }
           })
@@ -55,7 +58,7 @@ export const TiktokAPI = (url: string) =>
               id: content.aweme_id,
               createTime: content.create_time,
               description: content.desc,
-              hashtag: content.text_extra.filter((x) => x.hashtag_name !== undefined).map((v) => v.hashtag_name),
+              hashtag: content.text_extra.filter((x: any) => x.hashtag_name !== undefined).map((v: any) => v.hashtag_name),
               duration: toMinute(content.duration),
               author,
               statistics,
@@ -72,7 +75,7 @@ export const TiktokAPI = (url: string) =>
   })
 
 const fetchTiktokData = async (ID: string) => {
-  let data2: responseParser
+  let data2: responseParser | undefined
   await asyncRetry(
     async () => {
       const res = await fetch(
@@ -157,7 +160,7 @@ const parseTiktokData = (data: any): responseParser => {
   return { content, statistics, author, music }
 }
 
-const withParams = (args) => {
+const withParams = (args: any) => {
   return {
     ...args,
     version_name: "1.1.9",
