@@ -15,7 +15,7 @@ export type MusicalDownResponse = {
     desc?: string
     author: {
       avatar?: string
-      nickname: string
+      nickname?: string
     }
     music?: string
     images?: string[]

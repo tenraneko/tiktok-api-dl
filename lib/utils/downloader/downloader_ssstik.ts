@@ -44,7 +44,7 @@ export const SSSTik = (url: string) =>
         Object.entries({
           id: url,
           locale: "en",
-          tt: tt.result
+          tt: tt.result!
         })
       )
     })
@@ -54,7 +54,7 @@ export const SSSTik = (url: string) =>
         // Result
         const desc = $("p.maintext").text().trim()
         const author: Author = {
-          avatar: $("img.result_author").attr("src"),
+          avatar: $("img.result_author").attr("src") ?? "",
           nickname: $("h2").text().trim()
         }
         const statistics: Statistics = {
@@ -68,7 +68,7 @@ export const SSSTik = (url: string) =>
         $("ul.splide__list > li")
           .get()
           .map((img) => {
-            images.push($(img).find("a").attr("href"))
+            images.push($(img).find("a").attr("href") ?? "")
           })
 
         if (images.length !== 0) {
@@ -81,22 +81,21 @@ export const SSSTik = (url: string) =>
               author,
               statistics,
               images,
-              music: $("a.music").attr("href")
+              music: $("a.music").attr("href") ?? ""
             }
           })
         } else {
           // Video Result
-            const styleElement = $('style:contains(.result_overlay)').text()
-            const urlRegex = /url\((['"]?)(.*?)\1\)/;
-            const matches = styleElement.match(urlRegex);
-            
-            let cover = null;
+          const styleElement = $("style:contains(.result_overlay)").text()
+          const urlRegex = /url\((['"]?)(.*?)\1\)/
+          const matches = styleElement.match(urlRegex)
 
-            if (matches && matches.length >= 3) {
-                cover = matches[2];
-            }
+          let cover: any = null
 
-          
+          if (matches && matches.length >= 3) {
+            cover = matches[2]
+          }
+
           resolve({
             status: "success",
             result: {
@@ -106,7 +105,7 @@ export const SSSTik = (url: string) =>
               statistics,
               cover: cover,
               video: $("a.without_watermark").attr("href"),
-              music: $("a.music").attr("href")
+              music: $("a.music").attr("href") ?? ""
             }
           })
         }

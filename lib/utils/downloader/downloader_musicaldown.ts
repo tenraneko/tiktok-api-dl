@@ -16,15 +16,15 @@ const getRequest = (url: string) =>
       }
     })
       .then((data) => {
-        const cookie = data.headers["set-cookie"][0].split(";")[0] + "; " + "lang=en"
+        const cookie = data?.headers["set-cookie"]?.at(0)?.split(";")[0] + "; " + "lang=en"
         const $ = load(data.data)
         const input = $("div > input").map((_, el) => $(el))
         const request = {
-          [input.get(0).attr("name")]: url,
-          [input.get(1).attr("name")]: input.get(1).attr("value"),
-          [input.get(2).attr("name")]: input.get(2).attr("value")
+          [input.get(0)?.attr("name") ?? ""]: url!,
+          [input.get(1)?.attr("name") ?? ""]: input.get(1)?.attr("value")!,
+          [input.get(2)?.attr("name") ?? ""]: input.get(2)?.attr("value")!
         }
-        resolve({ status: "success", request, cookie })
+        resolve({ status: "success", request: request, cookie })
       })
       .catch((e) => resolve({ status: "error", message: "Failed to get the request form!" }))
   })
@@ -58,22 +58,22 @@ export const MusicalDown = (url: string) =>
         "Content-Type": "application/x-www-form-urlencoded",
         "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/111.0"
       },
-      data: new URLSearchParams(Object.entries(request.request))
+      data: new URLSearchParams(Object.entries(request.request ?? {}))
     })
       .then(async ({ data }) => {
         const $ = load(data)
 
         // Get Image Video
-        const images = []
+        const images: any = []
         $("div.row > div[class='col s12 m3']")
           .get()
           .map((v) => {
-            images.push($(v).find("img").attr("src"))
+            images.push($(v).find("img").attr("src") ?? "")
           })
 
         // Get Result Video
         let i = 1
-        let videos = {}
+        let videos: any = {}
         $("div[class='col s12 l8'] > a")
           .get()
           .map((v) => {
@@ -99,7 +99,7 @@ export const MusicalDown = (url: string) =>
           })
         } else {
           // Video Result
-          const music = await getMusic(request.cookie)
+          const music = await getMusic(request.cookie ?? "")
           resolve({
             status: "success",
             result: {
