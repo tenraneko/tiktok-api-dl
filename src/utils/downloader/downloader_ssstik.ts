@@ -86,6 +86,17 @@ export const SSSTik = (url: string) =>
           })
         } else {
           // Video Result
+            const styleElement = $('style:contains(.result_overlay)').text()
+            const urlRegex = /url\((['"]?)(.*?)\1\)/;
+            const matches = styleElement.match(urlRegex);
+            
+            let cover = null;
+
+            if (matches && matches.length >= 3) {
+                cover = matches[2];
+            }
+
+          
           resolve({
             status: "success",
             result: {
@@ -93,6 +104,7 @@ export const SSSTik = (url: string) =>
               desc,
               author,
               statistics,
+              cover: cover,
               video: $("a.without_watermark").attr("href"),
               music: $("a.music").attr("href")
             }
