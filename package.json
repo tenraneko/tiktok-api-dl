@@ -7,10 +7,9 @@
   "scripts": {
     "build": "tsc --build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TobyG74/tiktok-api-dl.git"
-  },
+  "files": [
+    "src/**/*"
+  ],
   "keywords": [
     "tiktok-api",
     "tiktok-downloader",
