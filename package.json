@@ -1,14 +1,16 @@
 {
-  "name": "tiktok-api-dl",
+  "name": "@tobyg74/tiktok-api-dl",
   "version": "1.0.16",
   "description": "Scraper for downloading media in the form of videos, images and audio from Tiktok. Also for stalking Tiktok Users",
-  "main": "src/index.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc --build"
   },
-   "files": [
-    "src/**/*"
-  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TobyG74/tiktok-api-dl.git"
+  },
   "keywords": [
     "tiktok-api",
     "tiktok-downloader",
