@@ -6,6 +6,9 @@
   "scripts": {
     "build": "tsc"
   },
+   "files": [
+    "src/**/*"
+  ],
   "keywords": [
     "tiktok-api",
     "tiktok-downloader",
