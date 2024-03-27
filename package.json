@@ -41,6 +41,6 @@
   "devDependencies": {
     "@types/cheerio": "^0.22.31",
     "@types/node": "^18.15.11",
-    "typescript": "^5.0.3"
+    "typescript": "^5.4.3"
   }
 }
