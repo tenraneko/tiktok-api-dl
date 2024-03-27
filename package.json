@@ -2,14 +2,10 @@
   "name": "tiktok-api-dl",
   "version": "1.0.16",
   "description": "Scraper for downloading media in the form of videos, images and audio from Tiktok. Also for stalking Tiktok Users",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "src/index.ts",
   "scripts": {
-    "build": "tsc --build"
+    "build": "tsc"
   },
-  "files": [
-    "lib/**/*"
-  ],
   "keywords": [
     "tiktok-api",
     "tiktok-downloader",
