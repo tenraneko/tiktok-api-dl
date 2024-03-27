@@ -14,6 +14,7 @@ export type SSSTikResponse = {
     statistics: Statistics
     images?: string[]
     video?: string
+    cover?: string | null;
     music: string
   }
 }
